@@ -5,7 +5,7 @@ create table extid_types (
 	secret_key bytea not null default gen_random_bytes(16)
 );
 
-create or replace function encode_extid(prefix text, id bigint)
+create function encode_extid(prefix text, id bigint)
 returns text
 stable
 language sql as $$
@@ -14,7 +14,7 @@ language sql as $$
 	where extid_types.prefix = $1;
 $$;
 
-create or replace function decode_extid(extid text)
+create function decode_extid(extid text)
 returns bigint
 stable
 language sql as $$
