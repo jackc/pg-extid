@@ -9,7 +9,7 @@ create function encode_extid(prefix text, id bigint)
 returns text
 stable
 language sql as $$
-	select extid_types.prefix || '_' || encode(encrypt(int8send(id), secret_key, 'aes-ecb/pad:none'), 'hex')
+	select extid_types.prefix || '_' || encode(encrypt(int8send(id) || '\x0000000000000000'::bytea, secret_key, 'aes-ecb/pad:none'), 'hex')
 	from extid_types
 	where extid_types.prefix = $1;
 $$;
