@@ -38,3 +38,4 @@ select decode_extid(encode_extid('user', n)) from generate_series(1, 100000) n;
 ## Other Implementations
 
 * [Go](https://github.com/jackc/go-extid)
+* [Ruby](https://github.com/jackc/ruby-extid)
